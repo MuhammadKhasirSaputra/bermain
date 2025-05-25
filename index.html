@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <title>BERANDA || RAGAM GAYA</title>
+
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+</head>
+
+
+<body>
+  <!-- Preloader - Animasi loading yang ditampilkan saat website sedang memuat konten -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Area - Navigasi website yang sticky (tetap terlihat saat scroll) -->
+  <header class="header-area header-sticky">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <!-- Logo Website - Menampilkan logo toko -->
+            <a href="index.html" class="logo">
+              <img src="assets/images/Logo.png" alt="" style="width: 158px;">
+            </a>
+            
+            <!-- Menu Navigasi - Links ke halaman-halaman website -->
+            <ul class="nav">
+              <li><a href="index.html" class="active">BERANDA</a></li>
+              <li><a href="produk.html">PRODUK</a></li>
+              <li><a href="form.html">FORM PEMESANAN</a></li>
+              <li><a href="tentang_kami.html">TENTANG KAMI</a></li>
+              <li><a href="contact.html">CONTACT US</a></li>
+              <li><a href="keranjang.html">KERANJANG</a></li>
+            </ul> 
+            
+            <!-- Mobile Menu Trigger - Untuk tampilan responsif di perangkat mobile -->
+            <a class="menu-trigger">
+              <span>Menu</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Banner - Section utama dengan animasi dan intro text -->
+  <div class="main-banner">
+    <!-- Canvas Container - Untuk animasi background dengan particles dan waves -->
+    <div class="canvas-container">
+      <canvas id="welcomeCanvas"></canvas>
+    </div>
+
+  <!-- Custom Video Controls - Kontrol volume dengan SVG icons -->
+  <div class="custom-controls" style="position: absolute; top: 130px; right: 50px; z-index: 1000;">
+    <div class="volume-control">
+      <span class="volume-icon" id="volume-toggle">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+          <!-- Icon untuk muted state -->
+          <path d="M3,9H7L12,4V20L7,15H3V9M16.59,12L14,9.41L15.41,8L18,10.59L20.59,8L22,9.41L19.41,12L22,14.59L20.59,16L18,13.41L15.41,16L14,14.59L16.59,12Z" id="muted-icon" style="display: none;"/>
+          <!-- Icon untuk volume rendah -->
+          <path d="M3,9H7L12,4V20L7,15H3V9M14,9.83V7L17,10L14,13V10.17" id="low-volume-icon" style="display: none;"/>
+          <!-- Icon untuk volume tinggi -->
+          <path d="M3,9H7L12,4V20L7,15H3V9M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.85 14,18.71V20.77C18.01,19.86 21,16.28 21,12C21,7.72 18.01,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16.03C15.5,15.29 16.5,13.77 16.5,12Z" id="high-volume-icon"/>
+        </svg>
+      </span>
+      <!-- Volume Slider untuk mengatur level suara -->
+      <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
+    </div>
+  </div>
+
+  <!-- Content Container - Berisi teks intro sdan testimoni -->
+<div class="container">
+  <div class="row">
+    <!-- Left Column - Teks selamat datang dan deskripsi toko -->
+    <div class="col-lg-6 align-self-center">
+      <div class="caption header-text">
+        <h6>Selamat Datang di Ragam Gaya</h6>
+        <h2>Pakaian Terbaik Sepanjang Masa</h2>
+        <p>Ragam Gaya menyediakan berbagai macam pakaian fashion terbaik, mulai dari pakaian bayi, Anak-anak, remaja, dewasa hingga pakaian cosplay dengan kualitas bahan yang terjamin. Dengan berbelanja di toko ini, kalian bisa tampil dengan gaya kekinian. Selain itu Ragam Gaya menawarkan berbagai macam potongan harga dan juga voucher gratis ongkos pengiriman keseluruh Indonesia.</p>
+      </div>
+    </div>
+    
+    <!-- Right Column - Container testimoni pelanggan -->
+    <div class="col-lg-6 mx-auto">
+      <div class="form-container h-100">
+        <h2 class="form-title">TESTIMONI CUSTOMERS</h2>
+        <!-- Testimoni Container - Akan diisi oleh JavaScript secara dinamis -->
+        <div id="testimoni-container">
+          <!-- Testimoni akan tampil otomatis di sini -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+
+  <!-- Video Promosi Section - Menampilkan video dengan custom controls -->
+  <section id="video-promosi">
+    <div class="container">
+      <div class="video-container">
+        <!-- Video Element dengan autoplay dan loop -->
+        <video id="promo-video" autoplay loop playsinline preload="auto">
+          <source src="assets/images/video.mp4" type="video/mp4">                
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories Section - Menampilkan kategori produk utama dengan gambar -->
+  <div class="section categories">
+    <div class="container">
+      <div class="row">
+        <!-- Section Heading -->
+        <div class="col-lg-12 text-center">
+          <div class="section-heading">
+            <h6>Kategori Teratas</h6>
+            <h2>Kategori Paling Dicari</h2>
+          </div>
+        </div>
+        
+        <!-- Kategori 1 - Baju Pria -->
+        <div class="col-lg col-sm-6 col-xs-12">
+          <div class="item">
+            <h4>BAJU PRIA</h4>
+            <div class="thumb">
+              <a href="produk.html"><img src="assets/images/1. Baju Batik Mewah Elegan.jpg" alt="Baju Batik Mewah Elegan"></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Kategori 2 - Baju Wanita -->
+        <div class="col-lg col-sm-6 col-xs-12">
+          <div class="item">
+            <h4>BAJU WANITA</h4>
+            <div class="thumb">
+              <a href="produk.html"><img src="assets/images/2. Baju Wanita Motif Kucing.jpeg" alt="Baju Wanita Motif Kucing"></a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Kategori 3 - Baju Bayi -->
+        <div class="col-lg col-sm-6 col-xs-12">
+          <div class="item">
+            <h4>BAJU BAYI</h4>
+            <div class="thumb">
+              <a href="produk.html"><img src="assets/images/3. Baju Bayi Casual Simple.jpeg" alt="Baju Bayi Casual Simple"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- More Info Section - Form untuk mengirimkan testimoni -->
+  <div class="more-info">
+    <div class="container">
+      <!-- Alert Box - Untuk menampilkan notifikasi sukses/error -->
+      <div id="alert-box" class="alert"></div>
+      
+      <div class="row">
+        <div class="col-lg-12 mb-4">
+          <!-- Form Container -->
+          <div class="form-container h-100">
+            <h2 class="form-title">FORM TESTIMONI TOKO RAGAM GAYA</h2>
+            
+            <!-- Form Testimoni -->
+            <form id="order-form">
+              <!-- Input Nama -->
+              <div class="form-group">
+                <label class="form-label" for="name">Nama Anda :</label>
+                <input type="text" class="form-custom" name="name" id="name" placeholder="Masukkan nama lengkap Anda">
+              </div>
+              
+              <!-- Input Pesan/Testimoni -->
+              <div class="form-group">
+                <label class="form-label" for="pesan">Testimoni Anda :</label>
+                <textarea class="form-custom" name="pesan" id="pesan" rows="4" placeholder="Bagikan pengalaman berbelanja Anda di sini..."></textarea>
+              </div>
+              
+              <!-- Button Container -->
+              <div class="row">
+                <div class="col-6">
+                  <button type="button" id="reset-form" class="btn-reset">RESET</button>
+                </div>
+                <div class="col-6">
+                  <button type="submit" class="btn-pesan">KIRIM SEKARANG</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer - Menampilkan copyright dan info lainnya -->
+  <footer>
+    <div class="container">
+      <div class="col-lg-12">
+        <p>Hak Cipta © 2025 Ragam Gaya Store <a rel="nofollow" href="index.html" target="_blank">Design: PKNP</a></p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- JavaScript Files - jQuery, Bootstrap, Isotope, Owl Carousel, Counter, Custom JS -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/counter.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+  <script>
+  // Event listener DOMContentLoaded - Menjalankan kode ketika DOM selesai dimuat
+  document.addEventListener('DOMContentLoaded', function() {
+    // Canvas setup - Mengatur canvas untuk animasi background
+    const canvas = document.getElementById('welcomeCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Definisi warna untuk animasi canvas
+    const primaryColor = '#ffffff'; // Warna utama (putih)
+    const secondaryColor = '#0092ff'; // Warna sekunder (biru)
+    const bgColor = '#0879e0'; // Warna background (biru tua)
+    
+    // Konfigurasi particles
+    let particles = [];
+    const particleCount = 50; // Jumlah partikel
+    const particleSpeedMultiplier = 0.2; // Pengali kecepatan partikel
+    
+    // Konfigurasi efek wave
+    let angle = 0;
+    const waveSpeed = 0.05; // Kecepatan pergerakan gelombang
+    const waveFrequency = 0.004; // Frekuensi gelombang
+    const waveAmplitude = 20; // Amplitudo gelombang
+    const numberOfWaves = 12; // Jumlah gelombang
+    const waveLineWidth = 5.2; // Ketebalan garis gelombang
+    
+    // Fungsi untuk membuat partikel untuk animasi
+    function createParticles() {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width, // Posisi X random
+          y: Math.random() * canvas.height, // Posisi Y random
+          size: Math.random() * 2 + 0.5, // Ukuran random antara 0.5 dan 2.5
+          speedX: (Math.random() * 1 - 0.5) * particleSpeedMultiplier, // Kecepatan X random
+          speedY: (Math.random() * 1 - 0.5) * particleSpeedMultiplier, // Kecepatan Y random
+          color: Math.random() > 0.3 ? primaryColor : secondaryColor, // 70% putih, 30% biru
+          opacity: Math.random() * 0.4 + 0.1 // Opacity random antara 0.1 dan 0.5
+        });
+      }
+    }
+    
+    // Fungsi untuk menggambar background pada canvas
+    function drawBackground() {
+      ctx.fillStyle = bgColor;
+      ctx.fillRect(0, 0, canvas.width, canvas.height); // Mengisi seluruh canvas dengan warna background
+    }
+    
+    // Fungsi untuk menggambar partikel pada canvas
+    function drawParticles() {
+      particles.forEach(particle => {
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2); // Membuat lingkaran
+        ctx.fillStyle = particle.color; // Set warna partikel
+        ctx.globalAlpha = particle.opacity; // Set transparansi
+        ctx.fill(); // Mengisi lingkaran dengan warna
+      });
+      ctx.globalAlpha = 1; // Reset globalAlpha ke nilai default
+    }
+    
+    // Fungsi untuk memperbarui posisi partikel
+    function updateParticles() {
+      particles.forEach(particle => {
+        // Menggerakkan partikel berdasarkan kecepatannya
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+        
+        // Wrap-around logic - Membuat partikel yang keluar dari canvas kembali muncul dari sisi lain
+        if (particle.x > canvas.width + particle.size) particle.x = -particle.size;
+        if (particle.x < -particle.size) particle.x = canvas.width + particle.size;
+        if (particle.y > canvas.height + particle.size) particle.y = -particle.size;
+        if (particle.y < -particle.size) particle.y = canvas.height + particle.size;
+      });
+    }
+    
+    // Fungsi untuk menggambar efek gelombang pada canvas
+    function drawWaves() {
+      ctx.lineWidth = waveLineWidth; // Set ketebalan garis
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)'; // Set warna garis (putih transparan)
+      
+      for (let i = 0; i < numberOfWaves; i++) {
+        ctx.beginPath();
+        for (let j = 0; j < canvas.width; j++) {
+          // Menghitung posisi Y untuk gelombang dengan efek sinus
+          const yOffset = Math.sin(j * waveFrequency + angle * (0.5 + i * 0.1)) * waveAmplitude * (numberOfWaves - i) / numberOfWaves;
+          const y = canvas.height * (i + 0.7) / (numberOfWaves + 1) + yOffset;
+          
+          // Membuat path dari titik-titik gelombang
+          if (j === 0) ctx.moveTo(j, y);
+          else ctx.lineTo(j, y);
+        }
+        ctx.stroke(); // Menggambar garis gelombang
+      }
+    }
+    
+    // Fungsi animasi utama - Dijalankan terus-menerus dengan requestAnimationFrame
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height); // Membersihkan canvas
+      drawBackground(); // Menggambar background
+      drawWaves(); // Menggambar gelombang
+      drawParticles(); // Menggambar partikel
+      updateParticles(); // Memperbarui posisi partikel
+      angle += waveSpeed; // Memperbarui sudut gelombang
+      requestAnimationFrame(animate); // Request frame berikutnya untuk animasi berkelanjutan
+    }
+    
+    // Fungsi untuk menyesuaikan ukuran canvas saat window resize
+    function resizeCanvas() {
+      canvas.width = window.innerWidth; // Set lebar canvas = lebar window
+      canvas.height = document.querySelector('.main-banner').offsetHeight; // Set tinggi canvas = tinggi main-banner
+      createParticles(); // Membuat ulang partikel sesuai ukuran baru
+    }
+    
+    // Initialize canvas - Pengaturan awal untuk canvas
+    resizeCanvas();
+    createParticles();
+    animate();
+    window.addEventListener('resize', resizeCanvas); // Event listener untuk window resize
+    
+    // Animasi teks - Menambahkan efek glow pada judul
+    const welcomeText = document.querySelector('.caption.header-text h6');
+    if (welcomeText) {
+      welcomeText.classList.add('text-glow'); // Menambahkan class untuk efek glow
+      
+      // Menambahkan style definisi untuk animasi glow
+      const style = document.createElement('style');
+      style.textContent = `
+        .text-glow {
+          color: white;
+          text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 20px rgba(0,146,255,0.6);
+          animation: textGlow 3s infinite alternate;
+        }
+        @keyframes textGlow {
+          0% { text-shadow: 0 0 10px rgba(255,255,255,0.8), 0 0 15px rgba(0,146,255,0.5); }
+          100% { text-shadow: 0 0 15px rgba(255,255,255,0.9), 0 0 25px rgba(0,146,255,0.7); }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+    
+    // Form submission handler - Menangani submit form testimoni
+    document.getElementById("order-form").addEventListener("submit", function(e) {
+      e.preventDefault(); // Mencegah default submit behavior yang akan me-refresh halaman
+      
+      // Mengambil nilai dari input form dan membersihkan whitespace
+      const name = document.getElementById("name").value.trim();
+      const pesan = document.getElementById("pesan").value.trim();
+      
+      // Validasi form - Memastikan semua field yang diperlukan terisi
+      if (!name || !pesan) {
+        showAlert('alert-error', 'Mohon isi semua kolom yang diperlukan');
+        return; // Menghentikan eksekusi jika validasi gagal
+      }
+      
+      // Membuat timestamp saat ini untuk direkam dengan testimoni
+      const timestamp = new Date().toISOString();
+      
+      // Mengambil testimoni existing dari localStorage atau membuat array kosong jika belum ada
+      const testimonis = JSON.parse(localStorage.getItem("testimonis")) || [];
+      
+      // Menambahkan testimoni baru ke array
+      testimonis.push({
+        name,
+        pesan,
+        timestamp
+      });
+      
+      // Menyimpan array testimoni yang telah diupdate ke localStorage
+      localStorage.setItem("testimonis", JSON.stringify(testimonis));
+      
+      // Menampilkan notifikasi sukses, memperbarui tampilan testimoni, dan reset form
+      showAlert('alert-success', 'Testimoni berhasil ditambahkan. Terima kasih!');
+      displayTestimonis();
+      this.reset(); // Membersihkan form
+      
+    });
+    
+    // Reset button handler - Menangani klik pada tombol reset
+    document.getElementById('reset-form').addEventListener('click', function() {
+      document.getElementById('order-form').reset(); // Menghapus semua input dalam form
+    });
+    
+    // Menampilkan testimoni yang ada saat halaman dimuat
+    displayTestimonis();
+    // Memulai auto-scroll testimoni
+    startAutoScroll();
+
+    // Video controls - Setup kontrol untuk video
+    const promoVideo = document.getElementById('promo-video');
+    const volumeToggle = document.getElementById('volume-toggle');
+    const volumeSlider = document.getElementById('volume-slider');
+    const mutedIcon = document.getElementById('muted-icon');
+    const lowVolumeIcon = document.getElementById('low-volume-icon');
+    const highVolumeIcon = document.getElementById('high-volume-icon');
+    
+    // Set volume awal video dari nilai slider
+    promoVideo.volume = volumeSlider.value;
+    updateVolumeIcon(promoVideo.volume); // Update icon yang ditampilkan
+    
+    // Toggle mute saat icon volume diklik
+    volumeToggle.addEventListener('click', function() {
+      promoVideo.muted = !promoVideo.muted; // Toggle status mute
+      updateVolumeIcon(promoVideo.muted ? 0 : volumeSlider.value); // Update icon
+    });
+    
+    // Mengubah volume saat slider digerakkan
+    volumeSlider.addEventListener('input', function() {
+      promoVideo.volume = this.value; // Set volume video
+      promoVideo.muted = (this.value === 0); // Mute jika volume 0
+      updateVolumeIcon(this.value); // Update icon
+    });
+    
+    // Fungsi untuk memperbarui icon volume berdasarkan level volume
+    function updateVolumeIcon(volume) {
+      // Sembunyikan semua icon terlebih dahulu
+      mutedIcon.style.display = 'none';
+      lowVolumeIcon.style.display = 'none';
+      highVolumeIcon.style.display = 'none';
+      
+      // Tampilkan icon yang sesuai berdasarkan status dan level volume
+      if (promoVideo.muted || volume === 0) {
+        mutedIcon.style.display = 'block'; // Icon muted
+      } else if (volume < 0.5) {
+        lowVolumeIcon.style.display = 'block'; // Icon volume rendah
+      } else {
+        highVolumeIcon.style.display = 'block'; // Icon volume tinggi
+      }
+    }
+    
+    // Mencoba memutar video dengan suara saat halaman dimuat
+    if (promoVideo) {
+      // Event listener untuk saat metadata video selesai dimuat
+      promoVideo.addEventListener('loadedmetadata', function() {
+        promoVideo.volume = volumeSlider.value; // Set volume
+        updateVolumeIcon(promoVideo.volume); // Update icon
+      });
+      
+      // Mencoba putar video (mungkin akan ditolak oleh kebijakan browser)
+      promoVideo.play().catch(error => {
+        console.warn("Autoplay prevented:", error);
+        promoVideo.muted = true; // Jika ditolak, set muted = true
+        updateVolumeIcon(0);
+        
+        // Coba putar lagi dengan muted
+        promoVideo.play().catch(err => {
+          console.error("Failed to play even with mute:", err);
+        });
+      });
+    }
+  });
+
+  // Fungsi untuk menampilkan alert/notifikasi
+  function showAlert(type, message) {
+    const alert = document.getElementById('alert-box');
+    alert.className = `alert ${type}`; // Set class sesuai tipe alert
+    alert.textContent = message; // Set pesan alert
+    alert.style.display = 'block'; // Tampilkan alert
+    
+    // Set timeout untuk menyembunyikan alert setelah 3 detik
+    setTimeout(() => {
+      alert.style.display = 'none';
+    }, 3000);
+  }
+
+  // Fungsi untuk menampilkan testimoni
+  function displayTestimonis() {
+    const container = document.getElementById("testimoni-container");
+    container.innerHTML = ""; // Bersihkan container
+    
+    // Ambil data testimoni dari localStorage
+    let testimonis = JSON.parse(localStorage.getItem("testimonis")) || [];
+    
+    // Urutkan testimoni berdasarkan timestamp (terbaru dulu)
+    testimonis.sort((a, b) => {
+      return new Date(b.timestamp) - new Date(a.timestamp);
+    });
+    
+    // Jika tidak ada testimoni, tampilkan pesan
+    if (testimonis.length === 0) {
+      container.innerHTML = `
+        <div class="no-testimoni">
+          <p>Belum ada testimoni. Jadilah yang pertama memberikan testimoni!</p>
+        </div>
+      `;
+      return;
+    }
+    
+    // Loop melalui data testimoni dan buat elemen untuk masing-masing
+    testimonis.forEach(t => {
+      let displayDate = '';
+      if (t.timestamp) {
+        // Format tanggal dan waktu untuk Indonesia
+        const date = new Date(t.timestamp);
+        displayDate = date.toLocaleDateString('id-ID', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric'
+        }) + ' pukul ' + date.toLocaleTimeString('id-ID', {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      }
+      
+      // Buat elemen testimoni
+      const box = document.createElement("div");
+      box.className = "testimoni-box";
+      box.innerHTML = `
+        <div class="header">
+          <strong>${t.name}</strong>
+          <span class="testimoni-date">${displayDate}</span>
+        </div>
+        <p>${t.pesan}</p>
+      `;
+      
+      // Tambahkan ke container
+      container.appendChild(box);
+    });
+  }
+
+  // Variabel untuk menyimpan interval auto-scroll
+  let scrollInterval;
+
+  // Fungsi untuk memulai auto-scroll testimoni
+  function startAutoScroll() {
+    const container = document.getElementById('testimoni-container');
+    
+    // Set interval untuk scroll testimoni setiap 4 detik
+    scrollInterval = setInterval(() => {
+      // Hanya scroll jika ada minimal 2 testimoni
+      if (container.children.length > 1) {
+        // Ambil testimoni pertama
+        const firstBox = container.children[0];
+        
+        // Animasi slide-up dan fade-out
+        firstBox.style.transition = "transform 0.8s ease, opacity 0.8s ease";
+        firstBox.style.transform = "translateY(-20px)";
+        firstBox.style.opacity = "0";
+        
+        // Setelah animasi, pindahkan elemen ke bagian bawah
+        setTimeout(() => {
+          container.removeChild(firstBox);
+          firstBox.style.transition = "none";
+          firstBox.style.transform = "translateY(20px)";
+          
+          // Animasi fade-in dari bawah
+          setTimeout(() => {
+            firstBox.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+            firstBox.style.transform = "translateY(0)";
+            firstBox.style.opacity = "1";
+            container.appendChild(firstBox); // Tambahkan ke bagian bawah
+          }, 50);
+        }, 800);
+      }
+    }, 4000); // Dijalankan setiap 4 detik
+  }
+
+  </script>
+</body>
+</html>

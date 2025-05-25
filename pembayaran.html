@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Pembayaran || RAGAM GAYA</title>
+  
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css">
+  
+  <style>
+    .checkout-container {
+      padding: 40px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    
+    .customer-info {
+      flex: 1;
+      min-width: 320px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 25px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    
+    .order-summary {
+      flex: 1;
+      min-width: 320px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 25px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+    
+    .form-section {
+      margin-bottom: 25px;
+    }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-control {
+      border-radius: 4px;
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+    
+    .order-item {
+      display: flex;
+      border-bottom: 1px solid #eee;
+      padding: 15px 0;
+    }
+    
+    .item-image {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+    
+    .item-details {
+      flex: 1;
+      padding-left: 15px;
+    }
+    
+    .item-name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .item-price {
+      color: #555;
+    }
+    
+    .item-quantity {
+      color: #777;
+      font-size: 14px;
+    }
+    
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 2px solid #eee;
+    }
+    
+    .payment-method {
+      margin-top: 10px;
+    }
+    
+    .payment-option {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .payment-option input {
+      margin-right: 10px;
+    }
+    
+    .btn-place-order {
+      background: #f33f3f;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 20px;
+      transition: background 0.3s;
+    }
+    
+    .btn-place-order:hover {
+      background: #e13131;
+    }
+    
+    .btn-place-order:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    
+    .receipt {
+      background: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      margin-top: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      display: none;
+    }
+    
+    .receipt-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .receipt-logo {
+      max-width: 120px;
+      margin-bottom: 10px;
+    }
+    
+    .receipt-title {
+      font-size: 22px;
+      font-weight: bold;
+    }
+    
+    .receipt-date {
+      color: #777;
+      margin-top: 5px;
+    }
+    
+    .receipt-divider {
+      border-top: 1px dashed #ddd;
+      margin: 15px 0;
+    }
+    
+    .receipt-action {
+      text-align: center;
+      margin-top: 20px;
+    }
+    
+    .btn-print {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .btn-print:hover {
+      background: #45a049;
+    }
+    
+    .form-error {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+    
+    .required-field::after {
+      content: " *";
+      color: red;
+    }
+    
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      
+      .receipt, .receipt * {
+        visibility: visible;
+      }
+      
+      .receipt {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        box-shadow: none;
+      }
+      
+      .receipt-action {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/Logo.png" alt="" style="width: 158px;">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li><a href="keranjang.html">KERANJANG</a></li>
+                    </ul> 
+                    <a class="menu-trigger">
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Banner Start ***** -->
+  <div class="page-heading header-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3>Pembayaran</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Banner End ***** -->
+
+  <!-- ***** Checkout Section Start ***** -->
+  <div class="container">
+    <div class="checkout-container">
+      <!-- Customer Information Form -->
+      <div class="customer-info">
+        <form id="checkout-form">
+          <div class="form-section">
+            <div class="section-title">Informasi Pelanggan</div>
+            
+            <div class="form-group">
+              <label for="customer-name" class="required-field">Nama Lengkap</label>
+              <input type="text" id="customer-name" class="form-control" placeholder="Masukkan nama lengkap" required>
+              <div id="name-error" class="form-error">Nama lengkap harus diisi</div>
+            </div>
+
+            <div class="form-group">
+                <label for="customer-address" class="required-field">Alamat Lengkap</label>
+                <textarea id="customer-address" class="form-control" rows="3" placeholder="Masukkan alamat lengkap" required></textarea>
+                <div id="address-error" class="form-error">Alamat harus diisi</div>
+            </div>
+            
+            <div class="form-group">
+              <label for="customer-phone" class="required-field">Nomor Telepon</label>
+              <input type="tel" id="customer-phone" class="form-control" placeholder="081234567890" required>
+              <div id="phone-error" class="form-error">Nomor telepon tidak valid</div>
+            </div>
+            
+          </div>
+
+          <div class="form-section">
+            <div class="section-title">Metode Pengiriman</div>
+            
+            <div class="payment-option">
+              <input type="radio" id="shipping-standard" name="shipping-method" value="standard" checked>
+              <label for="shipping-standard">Pengiriman Standar - Rp4.990</label>
+            </div>
+            
+            <div class="payment-option">
+              <input type="radio" id="shipping-express" name="shipping-method" value="express">
+              <label for="shipping-express">Pengiriman Express - Rp12.990</label>
+            </div>
+            
+            <div class="payment-option">
+              <input type="radio" id="shipping-free" name="shipping-method" value="free">
+              <label for="shipping-free">Gratis Ongkir (Pesanan di atas Rp300.000)</label>
+              <div id="free-shipping-warning" class="form-error" style="display: none;">Belanja minimal Rp300.000 untuk mendapatkan gratis ongkir</div>
+            </div>
+          </div>
+          
+          <div class="form-section">
+            <div class="section-title">Metode Pembayaran</div>
+            
+            <div class="payment-option">
+              <input type="radio" id="payment-transfer" name="payment-method" value="Transfer Bank">
+              <label for="payment-transfer">Transfer Bank</label>
+            </div>
+            
+            <div class="payment-option">
+              <input type="radio" id="payment-cod" name="payment-method" value="Cash On Delivery (COD)">
+              <label for="payment-cod">Cash On Delivery (COD)</label>
+            </div>
+            
+            <div class="payment-option">
+              <input type="radio" id="payment-ewallet" name="payment-method" value="E-Wallet">
+              <label for="payment-ewallet">E-Wallet (OVO, GoPay, DANA)</label>
+            </div>
+            
+            <div class="payment-option">
+              <input type="radio" id="payment-credit" name="payment-method" value="Kartu Kredit">
+              <label for="payment-credit">Kartu Kredit</label>
+            </div>
+            
+            <div id="payment-error" class="form-error">Pilih metode pembayaran</div>
+          </div>
+          
+          <button type="submit" class="btn-place-order">Selesaikan Pembayaran</button>
+        </form>
+      </div>
+      
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <div class="section-title">Ringkasan Pesanan</div>
+        
+        <div id="order-items">
+          <!-- Item list will be populated here -->
+        </div>
+        
+        <div class="receipt-divider"></div>
+        
+        <div class="summary-item">
+          <span>Metode Pengiriman:</span>
+          <span id="shipping-method-text">Pengiriman Standar</span>
+        </div>
+        
+        <div class="summary-item">
+          <span>Subtotal:</span>
+          <span id="summary-subtotal">Rp0</span>
+        </div>
+        
+        <div class="summary-item">
+          <span>Pajak (10%):</span>
+          <span id="summary-tax">Rp0</span>
+        </div>
+        
+        <div class="summary-item">
+          <span>Biaya Pengiriman:</span>
+          <span id="summary-shipping">Rp0</span>
+        </div>
+        
+        <div class="summary-total">
+          <span>Total:</span>
+          <span id="summary-total">Rp0</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Receipt -->
+    <div class="receipt" id="receipt">
+      <!-- Receipt content will be generated dynamically -->
+    </div>
+  </div>
+  <!-- ***** Checkout Section End ***** -->
+
+  <!-- ***** Footer Start ***** -->
+  <footer>
+    <div class="container">
+      <div class="col-lg-12">
+        <p>Hak Cipta © 2025 Ragam Gaya Store <a rel="nofollow" href="index.html" target="_blank">Design: PKNP</a></p>
+      </div>
+    </div>
+  </footer>
+  <!-- ***** Footer End ***** -->
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/counter.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+  <script>
+    // Fungsi untuk format angka menjadi format mata uang Rupiah
+function formatRupiah(angka) {
+  return 'Rp' + new Intl.NumberFormat('id-ID').format(angka);
+}
+
+// Fungsi untuk membuat tanggal format Indonesia
+function formatDate(date) {
+  const options = { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  };
+  return date.toLocaleDateString('id-ID', options);
+}
+
+// Fungsi untuk memuat ringkasan pesanan dari localStorage
+function loadOrderSummary() {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let orderSummary = document.getElementById('order-items');
+  
+  if (cart.length === 0) {
+    // Jika keranjang kosong, arahkan kembali ke halaman keranjang
+    alert('Keranjang belanja kosong! Silakan pilih produk terlebih dahulu.');
+    window.location.href = 'keranjang.html';
+    return;
+  }
+  
+  // Hitung subtotal, pajak, dan ongkir
+  let subtotal = 0;
+  cart.forEach(item => {
+    subtotal += parseInt(item.price) * item.quantity;
+  });
+  
+  let tax = Math.round(subtotal * 0.1);
+  let shippingMethod = localStorage.getItem('shippingMethod') || 'standard';
+  let shippingCost = 4990; // Default ke standard
+  
+  if (shippingMethod === 'express') {
+    shippingCost = 12990;
+  } else if (shippingMethod === 'free' && subtotal >= 300000) {
+    shippingCost = 0;
+  } else if (shippingMethod === 'free' && subtotal < 300000) {
+    // Jika subtotal kurang dari 300.000 tapi free shipping dipilih,
+    // reset ke pengiriman standard
+    shippingMethod = 'standard';
+    localStorage.setItem('shippingMethod', 'standard');
+    document.getElementById('shipping-standard').checked = true;
+    document.getElementById('shipping-free').disabled = true;
+  }
+  
+  let total = subtotal + tax + shippingCost;
+  
+  // Tampilkan item pesanan
+  let itemsHTML = '';
+  
+  cart.forEach(item => {
+    const itemTotal = parseInt(item.price) * item.quantity;
+    itemsHTML += `
+      <div class="order-item">
+        <img src="${item.image}" alt="${item.name}" class="item-image">
+        <div class="item-details">
+          <div class="item-name">${item.name}</div>
+          <div class="item-price">${formatRupiah(item.price)} × ${item.quantity}</div>
+          <div class="item-quantity">Total: ${formatRupiah(itemTotal)}</div>
+        </div>
+      </div>
+    `;
+  });
+  
+  orderSummary.innerHTML = itemsHTML;
+  
+  // Update ringkasan biaya
+  document.getElementById('summary-subtotal').textContent = formatRupiah(subtotal);
+  document.getElementById('summary-tax').textContent = formatRupiah(tax);
+  document.getElementById('summary-shipping').textContent = formatRupiah(shippingCost);
+  document.getElementById('summary-total').textContent = formatRupiah(total);
+  
+  // Tampilkan metode pengiriman yang dipilih
+  const shippingMethodText = document.getElementById('shipping-method-text');
+  if (shippingMethod === 'standard') {
+    shippingMethodText.textContent = 'Pengiriman Standar';
+  } else if (shippingMethod === 'express') {
+    shippingMethodText.textContent = 'Pengiriman Express';
+  } else if (shippingMethod === 'free') {
+    shippingMethodText.textContent = 'Gratis Ongkir';
+  }
+
+  // Atur status tombol radio pengiriman gratis
+  document.getElementById('shipping-free').disabled = subtotal < 300000;
+  
+  // Tambahkan teks peringatan jika subtotal kurang dari 300.000
+  const freeShippingLabel = document.querySelector('label[for="shipping-free"]');
+  if (subtotal < 300000) {
+    freeShippingLabel.innerHTML = 'Gratis Ongkir (Pesanan di atas Rp300.000) <span style="color: red; font-size: 12px;">- Belanja minimal Rp300.000 untuk gratis ongkir</span>';
+  } else {
+    freeShippingLabel.innerHTML = 'Gratis Ongkir (Pesanan di atas Rp300.000)';
+  }
+}
+
+// Fungsi untuk validasi form
+function validateForm() {
+  let isValid = true;
+  
+  // Reset error messages
+  document.querySelectorAll('.form-error').forEach(error => {
+    error.style.display = 'none';
+  });
+  
+  // Validasi nama
+  const name = document.getElementById('customer-name').value.trim();
+  if (name === '') {
+    document.getElementById('name-error').style.display = 'block';
+    isValid = false;
+  }
+  
+  // Validasi nomor telepon
+  const phone = document.getElementById('customer-phone').value.trim();
+  if (phone === '' || phone.length < 10) {
+    document.getElementById('phone-error').style.display = 'block';
+    isValid = false;
+  }
+  
+  // Validasi alamat
+  const address = document.getElementById('customer-address').value.trim();
+  if (address === '') {
+    document.getElementById('address-error').style.display = 'block';
+    isValid = false;
+  }
+  
+  // Validasi metode pembayaran
+  const paymentMethods = document.getElementsByName('payment-method');
+  let paymentSelected = false;
+  
+  for (let i = 0; i < paymentMethods.length; i++) {
+    if (paymentMethods[i].checked) {
+      paymentSelected = true;
+      break;
+    }
+  }
+  
+  if (!paymentSelected) {
+    document.getElementById('payment-error').style.display = 'block';
+    isValid = false;
+  }
+  
+  return isValid;
+}
+
+// Fungsi untuk menampilkan struk pembayaran
+function showReceipt() {
+  if (!validateForm()) {
+    return;
+  }
+  
+  // Ambil data keranjang dan metode pengiriman
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let shippingMethod = localStorage.getItem('shippingMethod') || 'standard';
+  
+  // Hitung subtotal, pajak, dan ongkir
+  let subtotal = 0;
+  cart.forEach(item => {
+    subtotal += parseInt(item.price) * item.quantity;
+  });
+  
+  let tax = Math.round(subtotal * 0.1);
+  let shippingCost = 4990; // Default ke standard
+  
+  if (shippingMethod === 'express') {
+    shippingCost = 12990;
+  } else if (shippingMethod === 'free' && subtotal >= 300000) {
+    shippingCost = 0;
+  } else {
+    // Default ke standard jika free shipping tidak memenuhi syarat
+    shippingMethod = 'standard';
+    shippingCost = 4990;
+  }
+  
+  let total = subtotal + tax + shippingCost;
+  
+  // Ambil data customer dari form
+  const customerName = document.getElementById('customer-name').value;
+  const customerPhone = document.getElementById('customer-phone').value;
+  const customerAddress = document.getElementById('customer-address').value;
+
+  
+  // Ambil metode pembayaran yang dipilih
+  const paymentMethods = document.getElementsByName('payment-method');
+  let selectedPayment = '';
+  
+  for (let i = 0; i < paymentMethods.length; i++) {
+    if (paymentMethods[i].checked) {
+      selectedPayment = paymentMethods[i].value;
+      break;
+    }
+  }
+  
+  // Buat konten struk
+  let receiptItems = '';
+  
+  cart.forEach(item => {
+    const itemTotal = parseInt(item.price) * item.quantity;
+    receiptItems += `
+      <div class="order-item">
+        <div class="item-details" style="padding-left: 0;">
+          <div class="item-name">${item.name}</div>
+          <div class="item-price">${formatRupiah(item.price)} × ${item.quantity}</div>
+          <div class="item-quantity">Total: ${formatRupiah(itemTotal)}</div>
+        </div>
+      </div>
+    `;
+  });
+  
+  // Tampilkan metode pengiriman
+  let shippingMethodText = 'Pengiriman Standar';
+  if (shippingMethod === 'express') {
+    shippingMethodText = 'Pengiriman Express';
+  } else if (shippingMethod === 'free') {
+    shippingMethodText = 'Gratis Ongkir';
+  }
+  
+  // Buat tanggal dan nomor pesanan
+  const currentDate = new Date();
+  const formattedDate = formatDate(currentDate);
+  const orderNumber = 'RG' + Date.now().toString().slice(-8);
+  
+  // Tampilkan struk
+  const receipt = document.getElementById('receipt');
+  receipt.innerHTML = `
+    <div class="receipt-header">
+      <img src="assets/images/LogoStruk.png" alt="Ragam Gaya Logo" class="receipt-logo">
+      <div class="receipt-title">STRUK PEMBAYARAN</div>
+      <div class="receipt-date">${formattedDate}</div>
+    </div>
+    
+    <div class="receipt-divider"></div>
+    
+    <div class="customer-details">
+      <div class="section-title">Detail Pelanggan</div>
+      <p><strong>No. Pesanan:</strong> ${orderNumber}</p>
+      <p><strong>Nama:</strong> ${customerName}</p>
+      <p><strong>Telepon:</strong> ${customerPhone}</p>
+      <p><strong>Alamat:</strong> ${customerAddress}</p>
+      <p><strong>Metode Pembayaran:</strong> ${selectedPayment}</p>
+    </div>
+    
+    <div class="receipt-divider"></div>
+    
+    <div class="order-details">
+      <div class="section-title">Pesanan</div>
+      ${receiptItems}
+    </div>
+    
+    <div class="receipt-divider"></div>
+    
+    <div class="shipping-details">
+      <div class="section-title">Pengiriman</div>
+      <p><strong>Metode:</strong> ${shippingMethodText}</p>
+      <p><strong>Biaya:</strong> ${formatRupiah(shippingCost)}</p>
+    </div>
+    
+    <div class="receipt-divider"></div>
+    
+    <div class="payment-details">
+      <div class="section-title">Ringkasan Pembayaran</div>
+      <div class="summary-item">
+        <span>Subtotal:</span>
+        <span>${formatRupiah(subtotal)}</span>
+      </div>
+      <div class="summary-item">
+        <span>Pajak (10%):</span>
+        <span>${formatRupiah(tax)}</span>
+      </div>
+      <div class="summary-item">
+        <span>Pengiriman:</span>
+        <span>${formatRupiah(shippingCost)}</span>
+      </div>
+      <div class="summary-total">
+        <span>Total:</span>
+        <span>${formatRupiah(total)}</span>
+      </div>
+    </div>
+    
+    <div class="receipt-divider"></div>
+    
+    <div class="receipt-footer" style="text-align: center; margin-top: 20px;">
+      <p>Terima kasih telah berbelanja di Ragam Gaya Store!</p>
+      <p>Untuk pertanyaan lebih lanjut, silakan hubungi kami di 081234567890</p>
+    </div>
+    
+    <div class="receipt-action">
+      <button class="btn-print" onclick="window.print()">Cetak Struk</button>
+    </div>
+  `;
+  
+  // Tampilkan struk
+  receipt.style.display = 'block';
+  
+  // Scroll ke struk
+  receipt.scrollIntoView({ behavior: 'smooth' });
+  
+  // Kosongkan keranjang jika pembayaran selesai
+  // localStorage.removeItem('cart');
+}
+
+// Fungsi untuk menyimpan metode pengiriman setiap kali diganti
+function saveShippingMethod() {
+  const shippingMethods = document.getElementsByName('shipping-method');
+  let selectedMethod = 'standard';
+  
+  for (let i = 0; i < shippingMethods.length; i++) {
+    if (shippingMethods[i].checked) {
+      selectedMethod = shippingMethods[i].value;
+      break;
+    }
+  }
+  
+  // Validasi apakah bisa menggunakan free shipping
+  if (selectedMethod === 'free') {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let subtotal = 0;
+    
+    cart.forEach(item => {
+      subtotal += parseInt(item.price) * item.quantity;
+    });
+    
+    if (subtotal < 300000) {
+      alert('Maaf, Gratis Ongkir hanya berlaku untuk pembelian minimal Rp300.000 (diluar pajak)');
+      document.getElementById('shipping-standard').checked = true;
+      selectedMethod = 'standard';
+    }
+  }
+  
+  localStorage.setItem('shippingMethod', selectedMethod);
+  loadOrderSummary();
+}
+
+// Saat halaman dimuat
+document.addEventListener('DOMContentLoaded', function() {
+  loadOrderSummary();
+  
+  // Event listener untuk form checkout
+  document.getElementById('checkout-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    showReceipt();
+  });
+  
+  // Event listener untuk metode pengiriman
+  const shippingMethods = document.getElementsByName('shipping-method');
+  for (let i = 0; i < shippingMethods.length; i++) {
+    shippingMethods[i].addEventListener('change', saveShippingMethod);
+  }
+});
+
+  </script>
+</body>
+</html>

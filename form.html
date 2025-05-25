@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>FORM PEMESANAN || RAGAM GAYA</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+  <script>
+    // Objek yang berisi daftar produk berdasarkan kategori
+    // Menyimpan array nama produk dalam properti yang sesuai dengan nama kategori
+    const productsByCategory = {
+      Pria: ["Baju Batik Mewah Elegan", "Baju Gamis Jubah Hitam", "Baju Gamis Jubah Putih", "Kaos Polos Warna Hitam"],
+      Wanita: ["Baju Wanita Motif Kucing", "Kemeja Brukat Modis", "Kemeja Krem Soft", "Kemeja Putih Modern"],
+      Bayi: ["Baju Bayi Casual Simple", "Baju Coat Motif Dear", "Baju Coat Motif Bunny", "Baju Bayi Dress Summer"]
+    };
+  
+    // Objek yang memetakan nama produk ke harga satuan
+    // Digunakan untuk mengambil harga produk berdasarkan nama produk
+    const priceMap = {
+      "Baju Batik Mewah Elegan": 100000,
+      "Baju Gamis Jubah Hitam": 100000,
+      "Baju Gamis Jubah Putih": 120000,
+      "Kaos Polos Warna Hitam": 110000,
+      "Baju Wanita Motif Kucing": 90000,
+      "Kemeja Brukat Modis": 90000,
+      "Kemeja Krem Soft": 150000,
+      "Kemeja Putih Modern": 170000,
+      "Baju Bayi Casual Simple": 130000,
+      "Baju Coat Motif Dear": 117000,
+      "Baju Coat Motif Bunny": 135000,
+      "Baju Bayi Dress Summer": 200000
+    };
+  
+    /**
+     * Fungsi untuk memperbarui daftar produk dalam dropdown berdasarkan kategori yang dipilih
+     * Dipanggil saat pengguna mengubah pilihan kategori
+     */
+    function updateProducts() {
+      // Mengambil nilai kategori yang dipilih
+      const category = document.getElementById("category").value;
+      
+      // Mengambil elemen dropdown produk
+      const productSelect = document.getElementById("product");
+      
+      // Mengosongkan dropdown dan menambahkan opsi default
+      productSelect.innerHTML = '<option value="">-- Pilih Nama Baju --</option>';
+      
+      // Jika kategori valid, tambahkan produk-produk dari kategori tersebut ke dropdown
+      if (productsByCategory[category]) {
+        productsByCategory[category].forEach(product => {
+          // Membuat elemen option baru untuk setiap produk
+          const option = document.createElement("option");
+          option.value = product;
+          option.textContent = product;
+          // Menambahkan option ke dropdown
+          productSelect.appendChild(option);
+        });
+      }
+      
+      // Memperbarui harga setelah mengubah daftar produk
+      updatePrice();
+    }
+  
+    /**
+     * Fungsi untuk menghitung dan memperbarui harga berdasarkan produk dan jumlah yang dipilih
+     * Dipanggil saat produk atau jumlah diubah
+     */
+    function updatePrice() {
+      // Mengambil nama produk yang dipilih
+      const product = document.getElementById("product").value;
+      
+      // Mengambil jumlah produk yang diinginkan (default 1 jika tidak valid)
+      const quantity = parseInt(document.getElementById("quantity").value) || 1;
+      
+      // Mengambil harga satuan dari priceMap (0 jika produk tidak ditemukan)
+      const unitPrice = priceMap[product] || 0;
+      
+      // Menghitung total harga
+      const totalPrice = unitPrice * quantity;
+      
+      // Mengisi input harga satuan dengan format "Rp xxx.xxx" untuk tampilan
+      document.getElementById("unit-price").value = "Rp " + unitPrice.toLocaleString('id-ID');
+      
+      // Menyimpan nilai numerik murni di hidden field untuk pengiriman data
+      document.getElementById("unit-price-value").value = unitPrice;
+      
+      // Mengisi input total harga dengan format "Rp xxx.xxx" untuk tampilan
+      document.getElementById("total-price").value = "Rp " + totalPrice.toLocaleString('id-ID');
+      
+      // Menyimpan nilai numerik murni di hidden field untuk pengiriman data
+      document.getElementById("total-price-value").value = totalPrice;
+    }
+    
+    /**
+     * Fungsi untuk mengatur ulang (reset) formulir
+     * Mengembalikan formulir ke keadaan awal dan membersihkan nilai-nilai yang dihitung
+     */
+    function resetForm() {
+      // Mengembalikan dropdown produk ke keadaan awal
+      document.getElementById("product").innerHTML = '<option value="">-- Pilih Nama Baju --</option>';
+      
+      // Mengatur ulang kolom harga yang ditampilkan
+      document.getElementById("unit-price").value = "";
+      document.getElementById("total-price").value = "";
+      
+      // Mengatur ulang hidden field untuk nilai harga
+      document.getElementById("unit-price-value").value = "0";
+      document.getElementById("total-price-value").value = "0";
+      
+      // Mengembalikan kategori ke opsi default
+      document.getElementById("category").selectedIndex = 0;
+      
+      // Mengembalikan jumlah pembelian ke nilai default
+      document.getElementById("quantity").value = "1";
+      
+      // Tampilkan pesan di konsol untuk tujuan debugging
+      console.log("Formulir telah direset");
+      
+      return true; // Memungkinkan aksi reset default browser tetap berjalan
+    }
+  
+    // Event listener yang dijalankan saat DOM telah dimuat sepenuhnya
+    document.addEventListener("DOMContentLoaded", () => {
+      // Menambahkan event listener ke input jumlah untuk memperbarui harga saat nilainya berubah
+      document.getElementById('quantity').addEventListener('input', updatePrice);
+      
+      // Menambahkan event listener ke dropdown produk untuk memperbarui harga saat produk dipilih
+      document.getElementById('product').addEventListener('change', updatePrice);
+      
+      // Menambahkan event listener untuk tombol reset
+      if (document.querySelector('.btn-reset')) {
+        document.querySelector('.btn-reset').addEventListener('click', resetForm);
+      }
+    });
+  </script>
+</head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/Logo.png" alt="" style="width: 158px;">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li><a href="index.html">BERANDA</a></li>
+                      <li><a href="produk.html">PRODUK</a></li>
+                      <li><a href="form.html" class="active">FORM PEMESANAN</a></li>
+                      <li><a href="tentang_kami.html">TENTANG KAMI</a></li>
+                      <li><a href="contact.html">CONTACT US</a></li>
+                      <li><a href="keranjang.html">KERANJANG</a></li>
+                    </ul> 
+                    <a class="menu-trigger">
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Banner Start ***** -->
+  <div class="page-heading header-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3>FORM PEMESANAN</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Banner End ***** -->
+
+    <!-- FORM START -->
+    <!-- target="_blank" -->
+    <form id="order-form" action="berhasil.html" method="get" >
+      <table class="form-table">
+        <tr><td><label for="name">Nama Anda:</label></td><td><input type="text" name="name" id="name" required></td></tr>
+        <tr><td><label for="address">Alamat Anda:</label></td><td><textarea name="address" id="address" required></textarea></td></tr>
+        <tr><td><label for="phone">No. Telepon:</label></td><td><input type="tel" name="phone" id="phone" required></td></tr>
+        <tr>
+          <td><label for="category">Kategori Baju:</label></td>
+          <td>
+            <select id="category" name="category" onchange="updateProducts()" required>
+              <option value="">-- Pilih Kategori --</option>
+              <option value="Pria">Baju Pria</option>
+              <option value="Wanita">Baju Wanita</option>
+              <option value="Bayi">Baju Bayi</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="product">Nama Baju:</label></td>
+          <td>
+            <select id="product" name="product" required>
+              <option value="">-- Pilih Nama Baju --</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Ukuran Baju:</label></td>
+          <td>
+            <select name="size" required>
+              <option value="">-- Pilih Ukuran --</option>
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Warna Baju:</label></td>
+          <td>
+            <select name="color" required>
+              <option value="">-- Pilih Warna --</option>
+              <option value="Merah">Merah</option>
+              <option value="Biru">Biru</option>
+              <option value="Hijau">Hijau</option>
+              <option value="Hitam">Hitam</option>
+            </select>
+          </td>
+        </tr>
+        <tr><td><label for="payment">Metode Pembayaran:</label></td>
+          <td>
+            <select name="payment" id="payment" required>
+              <option value="">-- Pilih Metode Pembayaran --</option>
+              <option value="Transfer">Bank Transfer</option>
+              <option value="Cod">Cash on Delivery</option>
+              <option value="Ewallet">E-Wallet</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label for="quantity">Jumlah Pembelian:</label></td><td><input type="number" id="quantity" name="quantity" value="1" min="1" required></td>
+        </tr>
+        <tr>
+          <td><label for="unit-price">Harga Satuan:</label></td>
+          <td>
+            <input type="text" id="unit-price" readonly>
+            <!-- Hidden field untuk menyimpan nilai numerik murni harga satuan -->
+            <input type="hidden" id="unit-price-value" name="unit-price" value="0">
+          </td>
+        </tr>
+        <tr>
+          <td><label for="total-price">Total Harga:</label></td>
+          <td>
+            <input type="text" id="total-price" readonly>
+            <!-- Hidden field untuk menyimpan nilai numerik murni total harga -->
+            <input type="hidden" id="total-price-value" name="total-price" value="0">
+          </td>
+        </tr>
+      </table>
+      <div class="button-container">
+        <button type="submit" class="btn-pesan">Pesan Sekarang</button>
+        <button type="reset" class="btn-reset">Reset Form</button>
+      </div>
+    </form>
+    <!-- FORM END -->
+
+  <!-- ***** Footer Start ***** -->
+  <footer>
+    <div class="container">
+      <div class="col-lg-12">
+        <p>Hak Cipta © 2025 Ragam Gaya Store <a rel="nofollow" href="index.html" target="_blank">Design: PKNP</a></p>
+      </div>
+    </div>
+  </footer>
+  <!-- ***** Footer End ***** -->
+
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/isotope.min.js"></script>
+<script src="assets/js/owl-carousel.js"></script>
+<script src="assets/js/counter.js"></script>
+<script src="assets/js/custom.js"></script>
+
+</body>
+</html>

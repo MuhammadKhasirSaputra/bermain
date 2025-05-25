@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>PRODUK || RAGAM GAYA</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>  
+
+  </head>
+
+  <!-- ***** Script PopUp Produk Start ***** -->
+  <script>
+    function openPopup(id) {
+      document.getElementById(id).style.display = "block";
+    }
+
+    function closePopup(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    // Fungsi untuk menambahkan produk ke keranjang
+    function addToCart(name, category, price, image) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      
+      // Cek apakah produk sudah ada di keranjang
+      let existingProduct = cart.find(item => item.name === name);
+      
+      if (existingProduct) {
+        // Jika produk sudah ada, tambah quantity
+        existingProduct.quantity += 1;
+      } else {
+        // Jika produk belum ada, tambahkan dengan quantity 1
+        let product = { 
+          name: name, 
+          category: category, 
+          price: price, 
+          image: image,
+          quantity: 1 
+        };
+        cart.push(product);
+      }
+      
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert("Produk berhasil dimasukkan ke keranjang!");
+      closePopup('popup1'); // Menutup pop-up setelah produk ditambahkan
+      closePopup('popup2'); 
+      closePopup('popup3'); 
+      closePopup('popup4'); 
+      closePopup('popup5'); 
+      closePopup('popup6'); 
+      closePopup('popup7'); 
+      closePopup('popup8'); 
+      closePopup('popup9'); 
+      closePopup('popup10'); 
+      closePopup('popup11'); 
+      closePopup('popup12'); 
+    }
+  </script>
+  <!-- ***** Script PopUp Produk End ***** -->
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/Logo.png" alt="" style="width: 158px;">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li><a href="index.html">BERANDA</a></li>
+                      <li><a href="produk.html" class="active">PRODUK</a></li>
+                      <li><a href="form.html">FORM PEMESANAN</a></li>
+                      <li><a href="tentang_kami.html">TENTANG KAMI</a></li>
+                      <li><a href="contact.html">CONTACT US</a></li>
+                      <li><a href="keranjang.html">KERANJANG</a></li>
+                    </ul> 
+                    <a class="menu-trigger">
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Banner Start ***** -->
+  <div class="page-heading header-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3>Produk</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Banner End ***** -->
+
+  <!-- ***** Produk Start ***** -->
+  <div class="section trending">
+    <div class="container">
+      <ul class="trending-filter">
+        <li>
+          <a class="is_active" href="#!" data-filter="*">SEMUA</a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".adv">PRIA</a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".str">PEREMPUAN</a>
+        </li>
+        <li>
+          <a href="#!" data-filter=".rac">BAYI</a>
+        </li>
+      </ul>
+      <div class="row trending-box">
+
+        <!-- PRODUK 1 START-->
+        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv">
+          <div class="item">
+            <div class="thumb">
+              <img src="assets/images/1. Baju Batik Mewah Elegan.jpg" alt="Baju Batik Mewah Elegan">
+              <span class="price"><em>115K</em>100K</span>
+            </div>
+            <div class="down-content">
+              <span class="category">Baju Pria</span>
+              <h6>Baju Batik Mewah Elegan</h6>
+              <div class="rating">
+                <span style="color: gold;">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                <small>(4/5)</small>
+              </div>
+
+              <!-- Tombol untuk membuka pop-up -->
+              <button onclick="openPopup('popup1')" class="btn btn-primary mt-2">Lihat Deskripsi</button>
+            </div>
+          </div>
+        </div>
+        <!-- POP UP PRODUK 1 -->
+        <div id="popup1" class="popup-overlay">
+          <div class="popup-box">
+            <span class="close-btn" onclick="closePopup('popup1')">&times;</span>
+
+            <div class="popup-content-2col">
+              <!-- Gambar Produk -->
+              <div class="popup-image">
+                <img src="assets/images/1. Baju Batik Mewah Elegan.jpg" alt="Baju Batik Mewah Elegan">
+              </div>
+
+              <!-- Konten Deskripsi -->
+              <div class="popup-details">
+                <h2>Baju Batik Mewah Elegan</h2>
+                <p class="popup-price"><del>Rp115.000</del> <strong style="color: #007bff;">Rp100.000</strong></p>
+
+                <p>
+                  ✨ Tampil berkelas dengan sentuhan etnik modern! <br>
+                  👔 Material: Katun premium – adem, lembut, dan nyaman dipakai dalam waktu lama. <br>
+                  🎨 Motif: Batik eksklusif dengan kombinasi warna elegan. <br>
+                  🎯 Model: Lengan panjang, potongan slim fit yang mempertegas siluet tubuh pria.
+                </p>
+
+                <p><strong>Ukuran:</strong> M, L, XL</p>
+                <p><strong>Warna:</strong> Coklat, Biru Tua, Hitam</p>
+
+                <!-- Tombol untuk menambahkan ke keranjang -->
+                <button onclick="addToCart('Baju Batik Mewah Elegan', 'Baju Pria', '100000', 'assets/images/1. Baju Batik Mewah Elegan.jpg')" class="btn btn-primary">Masukkan ke Keranjang</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUK 1 END-->
+
+        <!-- PRODUK 2 START-->
+        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 str">
+          <div class="item">
+            <div class="thumb">
+              <img src="assets/images/2. Baju Wanita Motif Kucing.jpeg" alt="Baju Wanita Motif Kucing">
+              <span class="price">90K</span>
+            </div>
+            <div class="down-content">
+              <span class="category">Baju Wanita</span>
+              <h6>Baju Wanita Motif Kucing</h6>
+
+              <!-- Rating Bintang -->
+              <div class="rating">
+                <span style="color: gold;">&#9733; &#9733; &#9733; &#9734; &#9734;</span>
+                <small>(3/5)</small>
+              </div>
+
+              <!-- Tombol untuk membuka pop-up -->
+              <button onclick="openPopup('popup2')" class="btn btn-primary mt-2">Lihat Deskripsi</button>
+            </div>
+          </div>
+        </div>
+        <!-- POP UP PRODUK 2 -->
+        <div id="popup2" class="popup-overlay">
+          <div class="popup-box">
+            <span class="close-btn" onclick="closePopup('popup2')">&times;</span>
+
+            <div class="popup-content-2col">
+              <!-- Gambar Produk -->
+              <div class="popup-image">
+                <img src="assets/images/2. Baju Wanita Motif Kucing.jpeg" alt="Baju Wanita Motif Kucing">
+              </div>
+
+              <!-- Konten Deskripsi -->
+              <div class="popup-details">
+                <h2>Baju Wanita Motif Kucing</h2>
+                <p class="popup-price">
+                  <strong style="color: #007bff;">Rp90.000</strong>
+                </p>
+
+                <p>
+                  👚 Bahan: Katun linen lembut, adem dan nyaman dipakai seharian. <br>
+                  😺 Desain Unik: Saku depan dengan bordir motif wajah kucing yang menggemaskan, cocok buat pecinta kucing! <br>
+                  👘 Model: Lengan ¾ dengan kerah klasik dan potongan loose fit, memberi kesan santai tapi tetap rapi. <br>
+                  🌼 Warna netral mudah dipadupadankan, cocok untuk gaya casual harian atau hangout bareng teman.
+                </p>
+
+                <p><strong>Ukuran:</strong> M, L, XL</p>
+                <p><strong>Warna:</strong> Coklat, Biru Tua, Hitam</p>
+
+                <!-- Tombol untuk menambahkan ke keranjang -->
+                <button onclick="addToCart('Baju Wanita Motif Kucing', 'Baju Wanita', '90000', 'assets/images/2. Baju Wanita Motif Kucing.jpeg')" class="btn btn-primary">Masukkan ke Keranjang</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUK 2 END-->
+
+        <!-- PRODUK 3 START-->
+        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 rac">
+          <div class="item">
+            <div class="thumb">
+              <img src="assets/images/3. Baju Bayi Casual Simple.jpeg" alt="Baju Bayi Casual Simple">
+              <span class="price">130K</span>
+            </div>
+            <div class="down-content">
+              <span class="category">Baju Bayi</span>
+              <h6>Baju Bayi Casual Simple</h6>
+
+              <!-- Rating Bintang -->
+              <div class="rating">
+                <span style="color: gold;">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                <small>(4/5)</small>
+              </div>
+
+              <!-- Tombol untuk membuka pop-up -->
+              <button onclick="openPopup('popup3')" class="btn btn-primary mt-2">Lihat Deskripsi</button>
+            </div>
+          </div>
+        </div>
+        <!-- POP UP PRODUK 3 -->
+        <div id="popup3" class="popup-overlay">
+          <div class="popup-box">
+            <span class="close-btn" onclick="closePopup('popup3')">&times;</span>
+
+            <div class="popup-content-2col">
+              <!-- Gambar Produk -->
+              <div class="popup-image">
+                <img src="assets/images/3. Baju Bayi Casual Simple.jpeg" alt="Baju Bayi Casual Simple">
+              </div>
+
+              <!-- Konten Deskripsi -->
+              <div class="popup-details">
+                <h2>Baju Bayi Casual Simple</h2>
+                <p class="popup-price">
+                  <strong style="color: #007bff;">Rp130.000</strong>
+                </p>
+
+                <p>
+                  👕 Kemeja putih lengan pendek – bahan katun lembut dan adem, cocok untuk cuaca tropis. <br>
+                  👖 Celana pendek army green – model loose fit dengan karet pinggang elastis, nyaman dipakai seharian. <br>
+                  👟 Bonus: Sepatu bayi model sneakers – warna putih dengan aksen cokelat muda yang manis. <br>
+                </p>
+
+                <p><strong>Ukuran:</strong> M, L, XL</p>
+                <p><strong>Warna:</strong> Coklat, Biru Tua, Hitam</p>
+
+                <!-- Tombol untuk menambahkan ke keranjang -->
+                <button onclick="addToCart('Baju Bayi Casual Simple', 'Baju Bayi', '130000', 'assets/images/3. Baju Bayi Casual Simple.jpeg')" class="btn btn-primary">Masukkan ke Keranjang</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUK 3 END-->
+
+        <!-- PRODUK 4 START-->
+        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 str">
+          <div class="item">
+            <div class="thumb">
+              <img src="assets/images/4. Kemeja Brukat Modis.jpeg" alt="Kemeja Brukat Modis">
+              <span class="price"><em>100K</em>90K</span>
+            </div>
+            <div class="down-content">
+              <span class="category">Baju Wanita</span>
+              <h6>Kemeja Brukat Modis</h6>
+
+              <!-- Rating Bintang -->
+              <div class="rating">
+                <span style="color: gold;">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
+                <small>(5/5)</small>
+              </div>
+
+              <!-- Tombol untuk membuka pop-up -->
+              <button onclick="openPopup('popup4')" class="btn btn-primary mt-2">Lihat Deskripsi</button>
+            </div>
+          </div>
+        </div>
+        <!-- POP UP PRODUK 4 -->
+        <div id="popup4" class="popup-overlay">
+          <div class="popup-box">
+            <span class="close-btn" onclick="closePopup('popup4')">&times;</span>
+
+            <div class="popup-content-2col">
+              <!-- Gambar Produk -->
+              <div class="popup-image">
+                <img src="assets/images/4. Kemeja Brukat Modis.jpeg" alt="Kemeja Brukat Modis">
+              </div>
+
+              <!-- Konten Deskripsi -->
+              <div class="popup-details">
+                <h2>Kemeja Brukat Modis</h2>
+                <p class="popup-price"><del>Rp100.000</del> <strong style="color: #007bff;">Rp90.000</strong></p>
+
+                <p>
+                  👚 Material: Katun berkualitas yang nyaman dipakai, dipadukan dengan detail brukat cantik di bagian depan. <br>
+                  ✨ Desain: Model longgar dengan potongan modern dan aksen lipit depan, cocok untuk gaya formal maupun semi-formal. <br>
+                  🌸 Detail Brukat: Motif bunga elegan yang menambah kesan feminin dan eksklusif. <br>
+                  👖 Cocok dipadukan dengan celana kain atau rok untuk tampilan yang sopan dan stylish. <br>
+                </p>
+
+                <p><strong>Ukuran:</strong> M, L, XL</p>
+                <p><strong>Warna:</strong> Coklat, Biru Tua, Hitam</p>
+
+                <!-- Tombol untuk menambahkan ke keranjang -->
+                <button onclick="addToCart('Kemeja Brukat Modis', 'Baju Wanita', '90000', 'assets/images/4. Kemeja Brukat Modis.jpeg')" class="btn btn-primary">Masukkan ke Keranjang</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUK 4 END-->
+
+        <!-- PRODUK 5 START-->
+        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv">
+          <div class="item">
+            <div class="thumb">
+              <img src="assets/images/5. Baju Gamis Jubah Hitam.jpg" alt="Baju Gamis Jubah Hitam">
+              <span class="price"><em>120K</em>100K</span>
+            </div>
+            <div class="down-content">
+              <span class="category">Baju Pria</span>
+              <h6>Baju Gamis Jubah Hitam</h6>
+
+              <!-- Rating Bintang -->
+              <div class="rating">
+                <span style="color: gold;">&#9733; &#9733; &#9733; &#9734; &#9734;</span>
+                <small>(3/5)</small>
+              </div>
+
+              <!-- Tombol untuk membuka pop-up -->
+              <button onclick="openPopup('popup5')" class="btn btn-primary mt-2">Lihat Deskripsi</button>
+            </div>
+          </div>
+        </div>
+        <!-- POP UP PRODUK 5 -->
+        <div id="popup5" class="popup-overlay">
+          <div class="popup-box">
+            <span class="close-btn" onclick="closePopup('popup5')">&times;</span>
+
+            <div class="popup-content-2col">
+              <!-- Gambar Produk -->
+              <div class="popup-image">
+                <img src="assets/images/5. Baju Gamis Jubah Hitam.jpg" alt="Baju Gamis Jubah Hitam">
+              </div>
+
+              <!-- Konten Deskripsi -->
+              <div class="popup-details">
+                <h2>Baju Gamis Jubah Hitam</h2>
+                <p class="popup-price"><del>Rp120.000</del> <strong style="color: #007bff;">Rp100.000</strong></p>
+
+                <p>
+                  🕌 Desain: Model jubah lurus dengan potongan longgar, nyaman untuk aktivitas harian maupun ibadah. <br>
+                  🧵 Detail: Warna hitam solid dengan aksen jahitan putih di bagian dada, kerah, dan ujung lengan — menambah kesan modern dan maskulin. <br>
+                  🌬 Material: Kain ringan dan adem, cocok digunakan di segala cuaca, tidak menerawang dan nyaman di kulit. <br>
+                  👕 Kerah Shanghai: Menambah kesan rapi dan sopan.
+                </p>
+
+                <p><strong>Ukuran:</strong> M, L, XL</p>
+                <p><strong>Warna:</strong> Coklat, Biru Tua, Hitam</p>
+
+                <!-- Tombol untuk menambahkan ke keranjang -->
+                <button onclick="addToCart('Baju Gamis Jubah Hitam', 'Baju Pria', '100000', 'assets/images/5. Baju Gamis Jubah Hitam.jpg')" class="btn btn-primary">Masukkan ke Keranjang</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUK 5 END-->
+
+        <!-- PRODUK 6 START-->
+        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 rac">
+          <div class="item">
+            <div class="thumb">
+              <img src="assets/images/6. Baju Coat Motif Deer.jpeg" alt="Baju Coat Motif Deer">
+              <span class="price">175K</span>
+            </div>
+            <div class="down-content">
+              <span class="category">Baju Bayi</span>
+              <h6>Baju Coat Motif Deer</h6>
+
+              <!-- Rating Bintang -->
+              <div class="rating">
+                <span style="color: gold;">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
+                <small>(5/5)</small>
+              </div>
+
+              <!-- Tombol untuk membuka pop-up -->
+              <button onclick="openPopup('popup6')" class="btn btn-primary mt-2">Lihat Deskripsi</button>
+            </div>
+          </div>
+        </div>
+        <!-- POP UP PRODUK 6 -->
+        <div id="popup6" class="popup-overlay">
+          <div class="popup-box">
+            <span class="close-btn" onclick="closePopup('popup6')">&times;</span>
+
+            <div class="popup-content-2col">
+              <!-- Gambar Produk -->
+              <div class="popup-image">
+                <img src="assets/images/6. Baju Coat Motif Deer.jpeg" alt="Baju Coat Motif Deer">
+              </div>
+
+              <!-- Konten Deskripsi -->
+              <div class="popup-details">
+                <h2>Baju Bayi Coat Deer</h2>
+                <p class="popup-price">
+                  <strong style="color: #007bff;">Rp175.000</strong></p>
+
+                <p>
+                  🧥 Material: Bahan bulu sintetis lembut berkualitas, hangat dan nyaman untuk kulit bayi. <br>
+                  🐰 Desain Imut: Dilengkapi hoodie dengan telinga kelinci dan tas kecil motif bunny — bikin tampilan si kecil makin menggemaskan! <br>
+                  🧸 Fitur: Resleting depan praktis, lapisan dalam lembut, cocok untuk cuaca dingin atau musim hujan. <br>
+                  🎨 Warna putih susu dengan detail pink pastel yang manis.
+                </p>
+
+                <p><strong>Ukuran:</strong> M, L, XL</p>
+                <p><strong>Warna:</strong> Coklat, Biru Tua, Hitam</p>
+
+                <!-- Tombol untuk menambahkan ke keranjang -->
+                <button onclick="addToCart('Baju Coat Motif Deer', 'Baju Bayi', '175000', 'assets/images/6. Baju Coat Motif Deer.jpeg')" class="btn btn-primary">Masukkan ke Keranjang</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUK 6 END-->
+
+        <!-- Produk 7 START-->
+        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 rac">
+          <div class="item">
+            <div class="thumb">
+              <img src="assets/images/7. Baju Coat Motif Buuny.jpeg" alt="Baju Coat Motif Buuny">
+              <span class="price"><em>150k</em>135k</span>
+            </div>
+            <div class="down-content">
+              <span class="category">Baju Bayi</span>
+              <h6>Baju Coat Motif Buuny</h6>
+
+              <!-- Rating Bintang -->
+              <div class="rating">
+                <span style="color: gold;">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                <small>(4/5)</small>
+              </div>
+
+              <!-- Tombol untuk membuka pop-up -->
+              <button onclick="openPopup('popup7')" class="btn btn-primary mt-2">Lihat Deskripsi</button>
+            </div>
+          </div>
+        </div>
+        <!-- POP UP PRODUK 7 -->
+        <div id="popup7" class="popup-overlay">
+          <div class="popup-box">
+            <span class="close-btn" onclick="closePopup('popup7')">&times;</span>
+
+            <div class="popup-content-2col">
+              <!-- Gambar Produk -->
+              <div class="popup-image">
+                <img src="assets/images/7. Baju Coat Motif Buuny.jpeg" alt="Baju Coat Motif Buuny">
+              </div>
+
+              <!-- Konten Deskripsi -->
+              <div class="popup-details">
+                <h2>Baju Coat Motif Bunny</h2>
+                <p class="popup-price"><del>150.000</del><strong style="color: #007bff;">Rp135.000</strong></p>
+
+                <p>
+                  🧥 Material: Bahan bulu sintetis lembut berkualitas, hangat dan nyaman untuk kulit bayi. <br>
+                  🐰 Desain Imut: Dilengkapi hoodie dengan telinga kelinci dan tas kecil motif bunny — bikin tampilan si kecil makin menggemaskan! <br>
+                  🧸 Fitur: Resleting depan praktis, lapisan dalam lembut, cocok untuk cuaca dingin atau musim hujan. <br>
+                  🎨 Warna putih susu dengan detail pink pastel yang manis.
+                </p>
+
+                <p><strong>Ukuran:</strong> M, L, XL</p>
+                <p><strong>Warna:</strong> Coklat, Biru Tua, Hitam</p>
+
+                <!-- Tombol untuk menambahkan ke keranjang -->
+                <button onclick="addToCart('Baju Coat Motif Bunny', 'Baju Bayi', '135000', 'assets/images/7. Baju Coat Motif Buuny.jpeg')" class="btn btn-primary">Masukkan ke Keranjang</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUK 7 END-->
+
+        <!-- Produk 8 START-->
+        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv">
+          <div class="item">
+            <div class="thumb">
+              <img src="assets/images/8. Baju Gamis Jubah Putih.jpg" alt="Baju Gamis Jubah Putih">
+              <span class="price">120K</span>
+            </div>
+            <div class="down-content">
+              <span class="category">Baju Pria</span>
+              <h6>Baju Gamis Jubah Putih</h6>
+
+              <!-- Rating Bintang -->
+              <div class="rating">
+                <span style="color: gold;">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                <small>(4/5)</small>
+              </div>
+
+              <!-- Tombol untuk membuka pop-up -->
+              <button onclick="openPopup('popup8')" class="btn btn-primary mt-2">Lihat Deskripsi</button>
+            </div>
+          </div>
+        </div>
+        <!-- POP UP PRODUK 8 -->
+        <div id="popup8" class="popup-overlay">
+          <div class="popup-box">
+            <span class="close-btn" onclick="closePopup('popup8')">&times;</span>
+
+            <div class="popup-content-2col">
+              <!-- Gambar Produk -->
+              <div class="popup-image">
+                <img src="assets/images/8. Baju Gamis Jubah Putih.jpg" alt="Baju Gamis Jubah Putih">
+              </div>
+
+              <!-- Konten Deskripsi -->
+              <div class="popup-details">
+                <h2>Baju Gamis Jubah Putih</h2>
+                <p class="popup-price">
+                  <strong style="color: #007bff;">Rp120.000</strong></p>
+
+                <p>
+                  🕌 Desain: Model jubah lurus dengan potongan longgar, nyaman untuk aktivitas harian maupun ibadah. <br>
+                  🧵 Detail: Warna putih bersih dengan kancing berwarna hitam - menambah kesan modern dan maskulin. <br>
+                  🌬 Material: Kain ringan dan adem, cocok digunakan di segala cuaca, tidak menerawang dan nyaman di kulit. <br>
+                  👕 Kerah Shanghai: Menambah kesan rapi dan sopan.
+                </p>
+
+                <p><strong>Ukuran:</strong> M, L, XL</p>
+                <p><strong>Warna:</strong> Coklat, Biru Tua, Hitam</p>
+
+                <!-- Tombol untuk menambahkan ke keranjang -->
+                <button onclick="addToCart('Baju Gamis Jubah Putih', 'Baju Pria', '120000', 'assets/images/8. Baju Gamis Jubah Putih.jpg')" class="btn btn-primary">Masukkan ke Keranjang</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUK 8 END-->
+
+        <!-- Produk 9 START-->
+        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 str">
+          <div class="item">
+            <div class="thumb">
+              <img src="assets/images/9. Kemeja Krem Soft.jpeg" alt="Kemeja Krem Soft">
+              <span class="price">150k</span>
+            </div>
+            <div class="down-content">
+              <span class="category">Baju Wanita</span>
+              <h6>Kemeja Krem Soft</h6>
+
+              <!-- Rating Bintang -->
+              <div class="rating">
+                <span style="color: gold;">&#9733; &#9733; &#9733; &#9734; &#9734;</span>
+                <small>(3/5)</small>
+              </div>
+
+              <!-- Tombol untuk membuka pop-up -->
+              <button onclick="openPopup('popup9')" class="btn btn-primary mt-2">Lihat Deskripsi</button>
+            </div>
+          </div>
+        </div>
+        <!-- Pop-up untuk Produk 9 -->
+        <div id="popup9" class="popup-overlay">
+          <div class="popup-box">
+            <span class="close-btn" onclick="closePopup('popup9')">&times;</span>
+
+            <div class="popup-content-2col">
+              <!-- Gambar Produk -->
+              <div class="popup-image">
+                <img src="assets/images/9. Kemeja Krem Soft.jpeg" alt="Kemeja Krem Soft">
+              </div>
+
+              <!-- Konten Deskripsi -->
+              <div class="popup-details">
+                <h2>Kemeja Krem Soft</h2>
+                <p class="popup-price">
+                  <strong style="color: #007bff;">Rp150.000</strong></p>
+
+                <p>
+                  👚 Material: Katun linen premium, adem dan ringan, cocok untuk cuaca panas maupun sejuk. <br>
+                  🎨 Warna: Krem natural yang netral, mudah dipadukan dengan berbagai outfit. <br>
+                  👕 Model: Lengan pendek, kerah klasik, dengan kancing depan full dan saku kecil di dada – simple namun tetap stylish. <br>
+                  ✨ Potongan loose fit, nyaman untuk daily wear, kuliah, kerja, atau hangout santai. <br>                   
+                </p>
+
+                <p><strong>Ukuran:</strong> M, L, XL</p>
+                <p><strong>Warna:</strong> Coklat, Biru Tua, Hitam</p>
+
+                <!-- Tombol untuk menambahkan ke keranjang -->
+                <button onclick="addToCart('Kemeja Krem Soft', 'Baju Wanita', '150000', 'assets/images/9. Kemeja Krem Soft.jpeg')" class="btn btn-primary">Masukkan ke Keranjang</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUK 9 END-->
+
+        <!-- Produk 10 START-->
+        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 adv">
+          <div class="item">
+            <div class="thumb">
+              <img src="assets/images/10. Kaos Polos Warna Hitam.jpg" alt="Kaos Polos Warna Hitam">
+              <span class="price">110k</span>
+            </div>
+            <div class="down-content">
+              <span class="category">Baju Pria</span>
+              <h6>Kaos Polos Warna Hitam</h6>
+
+              <!-- Rating Bintang -->
+              <div class="rating">
+                <span style="color: gold;">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                <small>(4/5)</small>
+              </div>
+
+              <!-- Tombol untuk membuka pop-up -->
+              <button onclick="openPopup('popup10')" class="btn btn-primary mt-2">Lihat Deskripsi</button>
+            </div>
+          </div>
+        </div>
+        <!-- Pop-up untuk Produk 10 -->
+        <div id="popup10" class="popup-overlay">
+          <div class="popup-box">
+            <span class="close-btn" onclick="closePopup('popup10')">&times;</span>
+
+            <div class="popup-content-2col">
+              <!-- Gambar Produk -->
+              <div class="popup-image">
+                <img src="assets/images/10. Kaos Polos Warna Hitam.jpg" alt="Kaos Polos Warna Hitam">
+              </div>
+
+              <!-- Konten Deskripsi -->
+              <div class="popup-details">
+                <h2>Kaos Polos Warna Hitam</h2>
+                <p class="popup-price">
+                  <strong style="color: #007bff;">Rp110.000</strong></p>
+
+                <p>
+                  👕 Material: Cotton combed 100% – adem, menyerap keringat, dan nyaman dipakai seharian. <br>
+                  🖤 Warna: Hitam pekat elegan, cocok dipadukan dengan berbagai gaya outfit. <br>
+                  🎯 Model: Unisex, potongan regular fit dengan jahitan rapi dan leher crewneck. <br>
+                  🧼 Tidak mudah melar atau pudar, awet dipakai berkali-kali.
+                </p>
+
+                <p><strong>Ukuran:</strong> M, L, XL</p>
+                <p><strong>Warna:</strong> Coklat, Biru Tua, Hitam</p>
+
+                <!-- Tombol untuk menambahkan ke keranjang -->
+                <button onclick="addToCart('Kaos Polos Warna Hitam', 'Baju Pria', '110000', 'assets/images/10. Kaos Polos Warna Hitam.jpg')" class="btn btn-primary">Masukkan ke Keranjang</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUK 10 END-->
+
+        <!-- Produk 11 START-->
+        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 str">
+          <div class="item">
+            <div class="thumb">
+              <img src="assets/images/11. Kemeja Putih Modern.jpeg" alt="Kemeja Putih Modern">
+              <span class="price"><em>200K</em>170K</span>
+            </div>
+            <div class="down-content">
+              <span class="category">Baju Wanita</span>
+              <h6>Kemeja Putih Modern</h6>
+
+              <!-- Rating Bintang -->
+              <div class="rating">
+                <span style="color: gold;">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
+                <small>(5/5)</small>
+              </div>
+
+              <!-- Tombol untuk membuka pop-up -->
+              <button onclick="openPopup('popup11')" class="btn btn-primary mt-2">Lihat Deskripsi</button>
+            </div>
+          </div>
+        </div>
+        <!-- Pop-up untuk Produk 11 -->
+        <div id="popup11" class="popup-overlay">
+          <div class="popup-box">
+            <span class="close-btn" onclick="closePopup('popup11')">&times;</span>
+
+            <div class="popup-content-2col">
+              <!-- Gambar Produk -->
+              <div class="popup-image">
+                <img src="assets/images/11. Kemeja Putih Modern.jpeg" alt="Kemeja Putih Modern">
+              </div>
+
+              <!-- Konten Deskripsi -->
+              <div class="popup-details">
+                <h2>Kemeja Putih Modern</h2>
+                <p class="popup-price"><del>200.0000</del><strong style="color: #007bff;">Rp175.000</strong></p>
+
+                <p>
+                  👚 Material: Katun linen premium, adem dan ringan, cocok untuk cuaca panas maupun sejuk. <br>
+                  🎨 Warna: Putih bersih, mudah dipadukan dengan berbagai outfit. <br>
+                  👕 Model: Lengan panjang, kerah klasik, dengan kancing depan full dan saku kecil di dada – simple namun tetap stylish. <br>
+                  ✨ Potongan loose fit, nyaman untuk daily wear, kuliah, kerja, atau hangout santai.
+                </p>
+
+                <p><strong>Ukuran:</strong> M, L, XL</p>
+                <p><strong>Warna:</strong> Coklat, Biru Tua, Hitam</p>
+
+                <!-- Tombol untuk menambahkan ke keranjang -->
+                <button onclick="addToCart('Kemeja Putih Modern', 'Baju Wanita', '175000', 'assets/images/11. Kemeja Putih Modern.jpeg')" class="btn btn-primary">Masukkan ke Keranjang</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUK 11 END-->
+
+        <!-- Produk 12 START-->
+        <div class="col-lg-3 col-md-6 align-self-center mb-30 trending-items col-md-6 rac">
+          <div class="item">
+            <div class="thumb">
+              <img src="assets/images/12. Baju Bayi Dress Summer.jpeg" alt="Baju Bayi Dress Summer">
+              <span class="price">200K</span>
+            </div>
+            <div class="down-content">
+              <span class="category">Baju Bayi</span>
+              <h6>Baju Bayi Dress Summer</h6>
+
+              <!-- Rating Bintang -->
+              <div class="rating">
+                <span style="color: gold;">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                <small>(4/5)</small>
+              </div>
+
+              <!-- Tombol untuk membuka pop-up -->
+              <button onclick="openPopup('popup12')" class="btn btn-primary mt-2">Lihat Deskripsi</button>
+            </div>
+          </div>
+        </div>
+        <!-- Pop-up untuk Produk 12 -->
+        <div id="popup12" class="popup-overlay">
+          <div class="popup-box">
+            <span class="close-btn" onclick="closePopup('popup12')">&times;</span>
+
+            <div class="popup-content-2col">
+              <!-- Gambar Produk -->
+              <div class="popup-image">
+                <img src="assets/images/12. Baju Bayi Dress Summer.jpeg" alt="Baju Bayi Dress Summer">
+              </div>
+
+              <!-- Konten Deskripsi -->
+              <div class="popup-details">
+                <h2>Baju Bayi Dress Summer</h2>
+                <p class="popup-price"><strong style="color: #007bff;">Rp200.000</strong></p>
+
+                <p>
+                  🌞 Outfit musim panas paling lucu untuk si kecil! <br>
+                  👗 Material: Katun lembut – cocok untuk kulit sensitif bayi. <br>
+                  🎀 Warna dan Motif: Ceria dan girly, dengan sentuhan warna pastel dan motif bunga. <br>
+                  🎯 Model: Dress bayi tanpa lengan, ringan dan tidak gerah. <br>
+                  🧼 Praktis dicuci dan tahan lama, cocok untuk aktivitas harian si kecil.
+                </p>
+
+                <p><strong>Ukuran:</strong> M, L, XL</p>
+                <p><strong>Warna:</strong> Coklat, Biru Tua, Hitam</p>
+
+                <!-- Tombol untuk menambahkan ke keranjang -->
+                <button onclick="addToCart('Baju Bayi Dress Summer', 'Baju Bayi', '200000', 'assets/images/12. Baju Bayi Dress Summer.jpeg')" class="btn btn-primary">Masukkan ke Keranjang</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- PRODUK 12 END-->
+
+      </div>
+    </div>
+  </div>
+  <!-- ***** Produk End ***** -->
+
+  <!-- ***** Footer Start ***** -->
+  <footer>
+    <div class="container">
+      <div class="col-lg-12">
+        <p>Hak Cipta © 2025 Ragam Gaya Store <a rel="nofollow" href="index.html" target="_blank">Design: PKNP</a></p>
+      </div>
+    </div>
+  </footer>
+  <!-- ***** Footer End ***** -->
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/counter.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+</body>
+</html>

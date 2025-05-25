@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keranjang Belanja || RAGAM GAYA</title>
+  
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+  
+  <script>
+    // Fungsi untuk format angka menjadi format mata uang Rupiah
+    function formatRupiah(angka) {
+      return 'Rp' + new Intl.NumberFormat('id-ID').format(angka);
+    }
+  
+    // Fungsi untuk memuat dan menampilkan isi keranjang belanja
+    function loadCart() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || []; // Ambil data keranjang dari localStorage, jika tidak ada maka array kosong
+      let cartLayout = document.getElementById('cart-layout'); // Ambil elemen layout keranjang
+      
+      if (cart.length === 0) {
+        // Jika keranjang kosong, tampilkan pesan kosong
+        cartLayout.innerHTML = `
+          <div class="cart-container">
+            <div class="empty-cart">
+              <h4>Keranjang belanja Anda masih kosong.</h4>
+              <p>Silakan kembali ke halaman produk untuk menambahkan item.</p>
+              <a href="produk.html" class="btn btn-primary mt-3">Lihat Produk</a>
+            </div>
+          </div>
+        `;
+      } else {
+        // Jika keranjang berisi produk
+        let subtotal = 0;
+        cart.forEach(item => {
+          subtotal += parseInt(item.price) * item.quantity; // Hitung subtotal
+        });
+  
+        // Awal HTML keranjang
+        let cartHTML = `
+          <div class="cart-container">
+            <div class="header">
+              <div>PRODUK</div>
+              <div>HARGA</div>
+              <div>JUMLAH</div>
+              <div>TOTAL</div>
+            </div>
+        `;
+  
+        // Looping untuk menambahkan setiap produk dalam keranjang
+        cart.forEach((item, index) => {
+          const itemTotal = parseInt(item.price) * item.quantity; // Total harga per produk
+          
+          cartHTML += `
+            <div class="cart-item">
+              <div class="product-info">
+                <div class="product-image">
+                  <img src="${item.image}" alt="${item.name}">
+                </div>
+                <div class="product-details">
+                  <h3>${item.name}</h3>
+                  <div class="product-meta">
+                    <span class="meta-tag">Kategori: ${item.category}</span>
+                  </div>
+                  <button class="remove-btn" onclick="removeItem(${index})">🗑️ Hapus</button> 
+                </div>
+              </div>
+              
+              <div class="price">${formatRupiah(item.price)}</div>
+              
+              <div class="quantity-control">
+                <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                <input type="text" class="quantity-input" value="${item.quantity}" readonly id="qty-${index}">
+                <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+              </div>
+              
+              <div class="total-price">${formatRupiah(itemTotal)}</div>
+              
+            </div>
+          `;
+        });
+  
+        // Bagian total dan tombol aksi
+        cartHTML += `
+          <div class="summary-total">
+            <span>Total:</span>
+            <span>${formatRupiah(subtotal)}</span>
+          </div>
+
+        <div class="coupon-container">
+          <div class="continue-btn-wrapper">
+            <button class="continue-btn" onclick="produk()">Lanjutkan Belanja</button>
+          </div>
+          <div class="cart-actions">
+            <button class="checkout-btn" onclick="proceedToCheckout()">Lanjutkan ke Pembayaran</button>
+            <button class="clear-btn" onclick="clearCart()">🗑️ Kosongkan</button>
+          </div>
+        </div>
+        `;
+  
+        // Tampilkan HTML ke dalam layout
+        cartLayout.innerHTML = cartHTML;
+      }
+    }
+  
+    // Fungsi untuk menghapus item dari keranjang
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1); // Hapus item di index tertentu
+      localStorage.setItem('cart', JSON.stringify(cart)); // Update localStorage
+      loadCart(); // Muat ulang tampilan keranjang
+    }
+  
+    // Fungsi untuk mengubah jumlah item dalam keranjang
+    function updateQuantity(index, change) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let qtyInput = document.getElementById(`qty-${index}`);
+      let currentQty = parseInt(qtyInput.value);
+      let newQty = currentQty + change;
+  
+      if (newQty > 0) {
+        cart[index].quantity = newQty; // Update quantity di array
+        localStorage.setItem('cart', JSON.stringify(cart)); // Simpan perubahan
+        loadCart(); // Muat ulang seluruh keranjang untuk memperbarui total
+      }
+    }
+  
+    // Fungsi untuk mengosongkan seluruh isi keranjang
+    function clearCart() {
+      if (confirm("Apakah Anda yakin ingin mengosongkan keranjang?")) {
+        localStorage.removeItem('cart'); // Hapus data keranjang
+        loadCart(); // Muat ulang tampilan
+      }
+    }
+  
+    // Fungsi untuk lanjut ke halaman form checkout
+    function proceedToCheckout() {
+      window.location.href = "pembayaran.html";
+    }
+
+    // Fungsi untuk kembali ke halaman produk
+    function produk() {
+      window.location.href = "produk.html";
+    }
+  
+    // Saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+      // Pastikan semua item dalam cart punya properti quantity
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let modified = false;
+  
+      cart.forEach(item => {
+        if (!item.quantity) {
+          item.quantity = 1;
+          modified = true;
+        }
+      });
+  
+      if (modified) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
+  
+      // Tampilkan isi keranjang
+      loadCart();
+    });
+  </script>  
+
+</head>
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/Logo.png" alt="" style="width: 158px;">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li><a href="index.html">BERANDA</a></li>
+                      <li><a href="produk.html">PRODUK</a></li>
+                      <li><a href="form.html">FORM PEMESANAN</a></li>
+                      <li><a href="tentang_kami.html">TENTANG KAMI</a></li>
+                      <li><a href="contact.html">CONTACT US</a></li>
+                      <li><a href="keranjang.html" class="active">KERANJANG</a></li>
+                    </ul> 
+                    <a class="menu-trigger">
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Banner Start ***** -->
+  <div class="page-heading header-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h3>Produk</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Banner End ***** -->
+
+  <!-- ***** Shopping Cart Section Start ***** -->
+  <div class="container">
+    <div class="cart-layout" id="cart-layout">
+      <!-- Dynamic content will be loaded here -->
+    </div>
+  </div>
+  <!-- ***** Shopping Cart Section End ***** -->
+
+  <!-- ***** Footer Start ***** -->
+  <footer>
+    <div class="container">
+      <div class="col-lg-12">
+        <p>Hak Cipta © 2025 Ragam Gaya Store <a rel="nofollow" href="index.html" target="_blank">Design: PKNP</a></p>
+      </div>
+    </div>
+  </footer>
+  <!-- ***** Footer End ***** -->
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/counter.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+</body>
+</html>
